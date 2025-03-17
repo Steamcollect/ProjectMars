@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    [Header("Settings")]
-    [SerializeField] int coinsAmount;
+    int coinsAmount;
 
     //[Header("References")]
 
@@ -15,7 +14,9 @@ public class PlayerInventory : MonoBehaviour
     [Header("Input")]
     [SerializeField] RSE_AddCoin rseAddCoin;
 
-    //[Header("Output")]
+    [Header("Output")]
+    [SerializeField] private RSE_UpdateUI rseUpdateUI;
+    [SerializeField] private RSO_CurrentCoins rsoCurrentCoins;
 
     private void OnEnable()
     {
@@ -29,6 +30,8 @@ public class PlayerInventory : MonoBehaviour
     void AddCoin(int amount)
     {
         coinsAmount += amount;
+        rsoCurrentCoins.Value = coinsAmount;
+        rseUpdateUI.Call();
     }
 
     public bool HaveEnoughCoin(int coinRequire)

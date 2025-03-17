@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2212057535256641726
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3560684293020032460}
+  - component: {fileID: 4795018696480381894}
+  m_Layer: 0
+  m_Name: WorldManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3560684293020032460
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2212057535256641726}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4795018696480381894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2212057535256641726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fadef157909f47249b2cd860cc97ea2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surfaces:
+  - caseData: {fileID: 11400000, guid: d15efdd6a89e96a47b97fe1415d67a3b, type: 2}
+    startingPosition: {x: 0, y: 0}
+    endingPosition: {x: 0, y: 0}
+  - caseData: {fileID: 11400000, guid: d15efdd6a89e96a47b97fe1415d67a3b, type: 2}
+    startingPosition: {x: 0, y: 5}
+    endingPosition: {x: 0, y: 5}
+  - caseData: {fileID: 11400000, guid: d15efdd6a89e96a47b97fe1415d67a3b, type: 2}
+    startingPosition: {x: -1, y: 1}
+    endingPosition: {x: 1, y: 4}
+  - caseData: {fileID: 11400000, guid: 7e618d61effb8a94a8d6f09c42e0d51c, type: 2}
+    startingPosition: {x: 1, y: -1}
+    endingPosition: {x: 1, y: 0}
+  - caseData: {fileID: 11400000, guid: 7e618d61effb8a94a8d6f09c42e0d51c, type: 2}
+    startingPosition: {x: 0, y: -1}
+    endingPosition: {x: 0, y: -1}
+  - caseData: {fileID: 11400000, guid: 7e618d61effb8a94a8d6f09c42e0d51c, type: 2}
+    startingPosition: {x: -1, y: -1}
+    endingPosition: {x: -1, y: 0}
+  - caseData: {fileID: 11400000, guid: 7e618d61effb8a94a8d6f09c42e0d51c, type: 2}
+    startingPosition: {x: -2, y: 0}
+    endingPosition: {x: -2, y: 4}
+  - caseData: {fileID: 11400000, guid: 7e618d61effb8a94a8d6f09c42e0d51c, type: 2}
+    startingPosition: {x: 2, y: 0}
+    endingPosition: {x: 2, y: 4}
+  - caseData: {fileID: 11400000, guid: 7e618d61effb8a94a8d6f09c42e0d51c, type: 2}
+    startingPosition: {x: -2, y: 5}
+    endingPosition: {x: -1, y: 5}
+  - caseData: {fileID: 11400000, guid: 7e618d61effb8a94a8d6f09c42e0d51c, type: 2}
+    startingPosition: {x: 1, y: 5}
+    endingPosition: {x: 2, y: 5}
+  - caseData: {fileID: 11400000, guid: 7e618d61effb8a94a8d6f09c42e0d51c, type: 2}
+    startingPosition: {x: -1, y: 6}
+    endingPosition: {x: 1, y: 6}
+  propsSurfaces:
+  - propsData: {fileID: 11400000, guid: baa881083d32592458bb77fda64a8994, type: 2}
+    position: {x: 1, y: 1}
+  - propsData: {fileID: 11400000, guid: baa881083d32592458bb77fda64a8994, type: 2}
+    position: {x: -1, y: 3}
+  - propsData: {fileID: 11400000, guid: baa881083d32592458bb77fda64a8994, type: 2}
+    position: {x: 1, y: 4}
+  - propsData: {fileID: 11400000, guid: d56fe9a83e756e744a0a4b50fc2ff392, type: 2}
+    position: {x: 0, y: 5}
+  rsfGetNewWorldPos: {fileID: 11400000, guid: c0e6eecd11996dc4c8e54012eff911f9, type: 2}
+  rseOnEntityEnter: {fileID: 11400000, guid: a8905096378150046a4c09e08dfaf570, type: 2}
+  rseOnEntityExit: {fileID: 11400000, guid: d828f0b88ac95094885e40824cf5a30b, type: 2}

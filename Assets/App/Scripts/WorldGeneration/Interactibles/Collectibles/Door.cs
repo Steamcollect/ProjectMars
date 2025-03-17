@@ -3,9 +3,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Door : Interactible
 {
-    [Header("Settings")]
-    [SerializeField] int coinRequire;
-
     //[Header("References")]
 
     //[Space(10)]
@@ -14,12 +11,14 @@ public class Door : Interactible
     // RSP
 
     //[Header("Input")]
-    //[Header("Output")]
+    [Header("Output")]
+    [SerializeField] private RSO_CoinsMax rsoCoinsMax;
+
     public override void OnEntityEnter(GameObject entity)
     {
         if (entity.CompareTag("Player"))
         {
-            if(entity.TryGetComponent(out PlayerInventory inventory) && inventory.HaveEnoughCoin(coinRequire))
+            if(entity.TryGetComponent(out PlayerInventory inventory) && inventory.HaveEnoughCoin(rsoCoinsMax.Value))
             {
                 int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
                 int nextSceneIndex = currentSceneIndex + 1;

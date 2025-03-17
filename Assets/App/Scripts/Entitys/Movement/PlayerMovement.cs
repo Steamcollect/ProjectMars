@@ -7,9 +7,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float moveTime;
 
     Vector2Int currentPosition;
+    int currentMove = 0;
 
     [Header("References")]
     [SerializeField] PlayerInput input;
+    
 
     [Space(10)]
     // RSO
@@ -22,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Output")]
     [SerializeField] RSE_OnEntityEnter rseOnEntityEnter;
     [SerializeField] RSE_OnEntityExit rseOnEntityExit;
+    [SerializeField] RSO_MoveMax rsoMoveMax;
+    [SerializeField] RSE_Loose rseLoose;
 
     private void OnEnable()
     {
@@ -30,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnDisable()
     {
         input.onMoveInput -= OnMoveInput;
+        transform.DOKill();
     }
 
     void OnMoveInput(Vector2 input)
@@ -39,18 +44,25 @@ public class PlayerMovement : MonoBehaviour
 
         if(targetPosition != currentPosition)
         {
-            rseOnEntityExit.Call(gameObject, currentPosition);
+            currentMove++;
 
-            transform.DOKill();
-            transform.DOMove(
-                new Vector3(targetPosition.x, transform.position.y, targetPosition.y), 
-                moveTime).
-                OnComplete(() =>
+            rseLoose.Call(currentMove);
+
+            if(currentMove <= rsoMoveMax.Value)
+            {
+                rseOnEntityExit.Call(gameObject, currentPosition);
+
+                transform.DOKill();
+                transform.DOMove(
+                    new Vector3(targetPosition.x, transform.position.y, targetPosition.y),
+                    moveTime).
+                    OnComplete(() =>
                     {
-                        rseOnEntityEnter.Call(gameObject, targetPosition);                   
+                        rseOnEntityEnter.Call(gameObject, targetPosition);
                     });
 
-            currentPosition = targetPosition;
+                currentPosition = targetPosition;
+            }
         }
     }
 }
