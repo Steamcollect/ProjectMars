@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinRequire: 3
+  nextLevelName: fb69a82cc232b2647894d6988dce1aed
 --- !u!1 &3791506251091910232
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,6 @@
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 public class Door : Interactible
 {
     [Header("Settings")]
@@ -19,7 +21,21 @@ public class Door : Interactible
         {
             if(entity.TryGetComponent(out PlayerInventory inventory) && inventory.HaveEnoughCoin(coinRequire))
             {
-                print("You win");
+                int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+                int nextSceneIndex = currentSceneIndex + 1;
+
+                if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+                {
+                    SceneManager.LoadScene(nextSceneIndex);
+                }
+                else
+                {
+                    SceneManager.LoadScene(0);
+                }
+            }
+            else
+            {
+                Debug.Log("Not Enough Coins!");
             }
         }
     }
