@@ -49,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         startMaterial = GetComponent<MeshRenderer>().material;
+        rsfGetNewWorldPos.Call(currentPosition, currentPosition);
     }
 
     void OnMoveInput(Vector2 input)

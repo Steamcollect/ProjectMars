@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UIElements;
+using Unity.VisualScripting;
 
 public class WorldManager : MonoBehaviour
 {
@@ -61,7 +62,13 @@ public class WorldManager : MonoBehaviour
                 GameObject go = Instantiate(surfaces[i].caseData.visual, new Vector3(position.x, 0, position.y), Quaternion.identity);
                 go.transform.SetParent(transform);
 
-                Tile tile = new Tile(position, surfaces[i].caseData, go.GetComponent<Interactible>());
+                Tile tile = new Tile(position, go, surfaces[i].caseData, go.GetComponent<Interactible>());
+
+                if (tile.caseData.caseType == CaseType.Walkable)
+                {
+                    go.SetActive(false);
+                }
+
                 cases.Add(position, tile);
             }
         }
@@ -73,7 +80,8 @@ public class WorldManager : MonoBehaviour
             GameObject go = Instantiate(propsSurfaces[i].propsData.visual, new Vector3(propsSurfaces[i].position.x, 0, propsSurfaces[i].position.y), Quaternion.identity);
             go.transform.SetParent(transform);
 
-            Props _props = new Props(propsSurfaces[i].position, propsSurfaces[i].propsData, go.GetComponent<Interactible>());
+            Props _props = new Props(propsSurfaces[i].position, go, propsSurfaces[i].propsData, go.GetComponent<Interactible>());
+            go.SetActive(false);
             props.Add(propsSurfaces[i].position, _props);
         }
     }
@@ -117,7 +125,6 @@ public class WorldManager : MonoBehaviour
     {
         if (!cases.ContainsKey(desirePosition))
         {
-            Debug.LogWarning($"There is no surface on the coordonate \"{desirePosition}\"");
             return currentPosition;
         }
 
@@ -126,6 +133,7 @@ public class WorldManager : MonoBehaviour
             switch (cases[desirePosition].caseData.caseType)
             {
                 case CaseType.Walkable:
+                    cases[desirePosition].gameObject.SetActive(true);
                     return cases[desirePosition].position;
 
                 case CaseType.Solid:
@@ -136,6 +144,7 @@ public class WorldManager : MonoBehaviour
         }
         else
         {
+            cases[desirePosition].gameObject.SetActive(true);
             return cases[desirePosition].position;
         }
     }
@@ -148,6 +157,7 @@ public class WorldManager : MonoBehaviour
             if (_tile.interactible != null)
             {
                 _tile.interactible.OnEntityEnter(entity);
+                Debug.Log(_tile.caseData.GameObject());
             }
         }
         
@@ -156,6 +166,7 @@ public class WorldManager : MonoBehaviour
             Props _props = props[position];
             if (_props.interactible != null)
             {
+                _props.gameObject?.SetActive(true);
                 _props.interactible.OnEntityEnter(entity);
             }
         }

@@ -18,7 +18,7 @@ public class PowerUp : Interactible
         {
             rseGhostMode.Call(timeEffect);
             isCollected = true;
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 

@@ -26,7 +26,7 @@ public class Coin : Interactible
         {
             rseAddCoin.Call(coinGiven);
             isCollected = true;
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 

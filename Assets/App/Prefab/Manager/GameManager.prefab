@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a18374e004a314f41ad061110ca6dbfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxMove: 12
+  maxMove: 20
   maxCoins: 3
   leveMenuName: fb69a82cc232b2647894d6988dce1aed
   rseLoose: {fileID: 11400000, guid: 17c954a71294db64981eb21033d0af0c, type: 2}
