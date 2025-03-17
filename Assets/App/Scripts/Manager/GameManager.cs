@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Input")]
     [SerializeField] private RSE_Loose rseLoose;
+    [SerializeField] private RSE_LooseWall rseLooseWall;
 
     [Header("Output")]
     [SerializeField] private RSE_UpdateUI rseUpdateUI;
@@ -28,12 +29,14 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
-        rseLoose.Action += LooseGame;
+        rseLoose.Action += LooseMove;
+        rseLooseWall.Action += LooseWall;
     }
 
     private void OnDisable()
     {
-        rseLoose.Action -= LooseGame;
+        rseLoose.Action -= LooseMove;
+        rseLooseWall.Action -= LooseWall;
     }
 
     private void Start()
@@ -47,7 +50,7 @@ public class GameManager : MonoBehaviour
         rseUpdateUI.Call();
     }
 
-    private void LooseGame(int currentMove)
+    private void LooseMove(int currentMove)
     {
         if (currentMove > maxMove)
         {
@@ -62,5 +65,10 @@ public class GameManager : MonoBehaviour
 
             rseUpdateUI.Call();
         }
+    }
+
+    private void LooseWall()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

@@ -186,11 +186,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveTime: 0.1
   input: {fileID: 8837901268386644492}
+  materialGhost: {fileID: 2100000, guid: 72ea64300a861144690a4e291c009634, type: 2}
   rsfGetNewWorldPos: {fileID: 11400000, guid: c0e6eecd11996dc4c8e54012eff911f9, type: 2}
+  rseGhostMode: {fileID: 11400000, guid: 4867d04c7373d2c4c9f39e1110be37fa, type: 2}
   rseOnEntityEnter: {fileID: 11400000, guid: a8905096378150046a4c09e08dfaf570, type: 2}
   rseOnEntityExit: {fileID: 11400000, guid: d828f0b88ac95094885e40824cf5a30b, type: 2}
   rsoMoveMax: {fileID: 11400000, guid: 2a475b513941d4f4ab5bf8743876b659, type: 2}
   rseLoose: {fileID: 11400000, guid: 17c954a71294db64981eb21033d0af0c, type: 2}
+  rsoGhostMode: {fileID: 11400000, guid: aa7d5ec84aafb294190fcf8af8cdf81d, type: 2}
+  rseCurrentTypeTile: {fileID: 11400000, guid: a5bf1d2a57934054abdc020347b09371, type: 2}
+  rseUpdateUIGhost: {fileID: 11400000, guid: 3c64dbb8a2c3fc64f94b6fe3c72e051d, type: 2}
 --- !u!114 &3002075499070938521
 MonoBehaviour:
   m_ObjectHideFlags: 0

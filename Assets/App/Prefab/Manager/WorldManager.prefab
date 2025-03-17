@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2212057535256641726}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -87,6 +87,11 @@ MonoBehaviour:
     position: {x: 1, y: 4}
   - propsData: {fileID: 11400000, guid: d56fe9a83e756e744a0a4b50fc2ff392, type: 2}
     position: {x: 0, y: 5}
+  - propsData: {fileID: 11400000, guid: 71d1373f07316084ab38f6ab8f7814fd, type: 2}
+    position: {x: 0, y: 2}
   rsfGetNewWorldPos: {fileID: 11400000, guid: c0e6eecd11996dc4c8e54012eff911f9, type: 2}
   rseOnEntityEnter: {fileID: 11400000, guid: a8905096378150046a4c09e08dfaf570, type: 2}
   rseOnEntityExit: {fileID: 11400000, guid: d828f0b88ac95094885e40824cf5a30b, type: 2}
+  rseCurrentTypeTile: {fileID: 11400000, guid: a5bf1d2a57934054abdc020347b09371, type: 2}
+  rsoGhostMode: {fileID: 11400000, guid: aa7d5ec84aafb294190fcf8af8cdf81d, type: 2}
+  rseLooseWall: {fileID: 11400000, guid: dc8397d9e75dacb4bb990ad52fe69a97, type: 2}

@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -8,10 +9,11 @@ public class PlayerMovement : MonoBehaviour
 
     Vector2Int currentPosition;
     int currentMove = 0;
+    Material startMaterial;
 
     [Header("References")]
     [SerializeField] PlayerInput input;
-    
+    [SerializeField] Material materialGhost;
 
     [Space(10)]
     // RSO
@@ -20,21 +22,33 @@ public class PlayerMovement : MonoBehaviour
 
     // RSP
 
-    //[Header("Input")]
+    [Header("Input")]
+    [SerializeField] RSE_GhostMode rseGhostMode;
+
     [Header("Output")]
     [SerializeField] RSE_OnEntityEnter rseOnEntityEnter;
     [SerializeField] RSE_OnEntityExit rseOnEntityExit;
     [SerializeField] RSO_MoveMax rsoMoveMax;
     [SerializeField] RSE_Loose rseLoose;
+    [SerializeField] RSO_GhostMode rsoGhostMode;
+    [SerializeField] RSE_CurrentTypeTile rseCurrentTypeTile;
+    [SerializeField] RSE_UpdateUIGhost rseUpdateUIGhost;
 
     private void OnEnable()
     {
         input.onMoveInput += OnMoveInput;
+        rseGhostMode.Action += GhostMode;
     }
     private void OnDisable()
     {
         input.onMoveInput -= OnMoveInput;
         transform.DOKill();
+        rseGhostMode.Action -= GhostMode;
+    }
+
+    private void Start()
+    {
+        startMaterial = GetComponent<MeshRenderer>().material;
     }
 
     void OnMoveInput(Vector2 input)
@@ -64,5 +78,34 @@ public class PlayerMovement : MonoBehaviour
                 currentPosition = targetPosition;
             }
         }
+    }
+
+    void GhostMode(float timer)
+    {
+        StartCoroutine(GhostModeTimer(timer));
+    }
+
+    IEnumerator GhostModeTimer(float timer)
+    {
+        rsoGhostMode.Value = true;
+
+        float elapsedTime = 0f;
+
+        rseUpdateUIGhost.Call(timer);
+        GetComponent<MeshRenderer>().material = materialGhost;
+
+        while (elapsedTime < timer)
+        {
+            rseUpdateUIGhost.Call(timer - elapsedTime);
+
+            yield return null;
+            elapsedTime += Time.deltaTime;
+        }
+
+        rsoGhostMode.Value = false;
+        rseUpdateUIGhost.Call(0);
+        GetComponent<MeshRenderer>().material = startMaterial;
+
+        rseCurrentTypeTile.Call(currentPosition);
     }
 }

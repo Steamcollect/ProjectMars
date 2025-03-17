@@ -22,8 +22,11 @@ public class WorldManager : MonoBehaviour
     [Header("Input")]
     [SerializeField] RSE_OnEntityEnter rseOnEntityEnter;
     [SerializeField] RSE_OnEntityExit rseOnEntityExit;
-    
-    //[Header("Output")]
+    [SerializeField] RSE_CurrentTypeTile rseCurrentTypeTile;
+
+    [Header("Output")]
+    [SerializeField] RSO_GhostMode rsoGhostMode;
+    [SerializeField] RSE_LooseWall rseLooseWall;
 
     private void OnEnable()
     {
@@ -31,6 +34,7 @@ public class WorldManager : MonoBehaviour
 
         rseOnEntityEnter.Action += OnEntityEnter;
         rseOnEntityExit.Action += OnEntityExit;
+        rseCurrentTypeTile.Action += CurrentTypeTile;
     }
     private void OnDisable()
     {
@@ -38,6 +42,7 @@ public class WorldManager : MonoBehaviour
 
         rseOnEntityEnter.Action -= OnEntityEnter;
         rseOnEntityExit.Action -= OnEntityExit;
+        rseCurrentTypeTile.Action -= CurrentTypeTile;
     }
 
     private void Start()
@@ -94,6 +99,20 @@ public class WorldManager : MonoBehaviour
         return positions.ToArray();
     }
 
+    void CurrentTypeTile(Vector2Int currentPosition)
+    {
+        switch (cases[currentPosition].caseData.caseType)
+        {
+            case CaseType.Walkable:
+                break;
+            case CaseType.Solid:
+                rseLooseWall.Call();
+                break;
+            default: 
+                break;
+        }
+    }
+
     Vector2Int GetNewTile(Vector2Int currentPosition, Vector2Int desirePosition)
     {
         if (!cases.ContainsKey(desirePosition))
@@ -102,15 +121,22 @@ public class WorldManager : MonoBehaviour
             return currentPosition;
         }
 
-        switch (cases[desirePosition].caseData.caseType)
+        if(!rsoGhostMode.Value)
         {
-            case CaseType.Walkable:
-                return cases[desirePosition].position;
+            switch (cases[desirePosition].caseData.caseType)
+            {
+                case CaseType.Walkable:
+                    return cases[desirePosition].position;
 
-            case CaseType.Solid:
-                return currentPosition;
+                case CaseType.Solid:
+                    return currentPosition;
 
-            default: return currentPosition;
+                default: return currentPosition;
+            }
+        }
+        else
+        {
+            return cases[desirePosition].position;
         }
     }
 

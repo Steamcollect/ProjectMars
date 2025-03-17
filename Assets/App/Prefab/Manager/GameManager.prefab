@@ -48,6 +48,7 @@ MonoBehaviour:
   maxCoins: 3
   leveMenuName: fb69a82cc232b2647894d6988dce1aed
   rseLoose: {fileID: 11400000, guid: 17c954a71294db64981eb21033d0af0c, type: 2}
+  rseLooseWall: {fileID: 11400000, guid: dc8397d9e75dacb4bb990ad52fe69a97, type: 2}
   rseUpdateUI: {fileID: 11400000, guid: 19dbb46b7421860489d68cdcbbebfd4a, type: 2}
   rsoMoveMax: {fileID: 11400000, guid: 2a475b513941d4f4ab5bf8743876b659, type: 2}
   rsoCurrentMove: {fileID: 11400000, guid: f3021d2fca076fe479de65f2e905d895, type: 2}
