@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using Unity.Collections;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class WorldManager : MonoBehaviour
 {
@@ -168,6 +169,12 @@ public class WorldManager : MonoBehaviour
 
     void OnEntityEnter(GameObject entity, Vector2Int position)
     {
+        ShowTile(position);
+        ShowTile(position + Vector2Int.up);
+        ShowTile(position + Vector2Int.down);
+        ShowTile(position + Vector2Int.left);
+        ShowTile(position + Vector2Int.right);
+
         if (cases.ContainsKey(position))
         {
             Tile _tile = cases[position];
@@ -176,17 +183,27 @@ public class WorldManager : MonoBehaviour
                 _tile.interactible.OnEntityEnter(entity);
             }
         }
-        
         if (props.ContainsKey(position))
         {
             Props _props = props[position];
             if (_props.interactible != null)
             {
-                _props.gameObject?.SetActive(true);
                 _props.interactible.OnEntityEnter(entity);
             }
         }
     }
+    void ShowTile(Vector2Int position)
+    {
+        if (cases.ContainsKey(position))
+        {
+            cases[position].gameObject?.SetActive(true);
+        }
+        if (props.ContainsKey(position))
+        {
+            props[position].gameObject?.SetActive(true);
+        }
+    }
+
     void OnEntityExit(GameObject entity, Vector2Int position)
     {
         if (cases.ContainsKey(position))

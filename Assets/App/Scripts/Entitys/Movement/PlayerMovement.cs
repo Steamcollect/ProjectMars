@@ -41,15 +41,27 @@ public class PlayerMovement : MonoBehaviour
     }
     private void OnDisable()
     {
-        input.onMoveInput -= OnMoveInput;
         transform.DOKill();
+
+        input.onMoveInput -= OnMoveInput;
         rseGhostMode.Action -= GhostMode;
     }
-
+    private void OnDestroy()
+    {
+        transform.DOKill();
+    }
+    
     private void Start()
     {
         startMaterial = GetComponent<MeshRenderer>().material;
         rsfGetNewWorldPos.Call(currentPosition, currentPosition);
+
+        Invoke("LateStart", 0.1f);
+    }
+
+    void LateStart()
+    {
+        rseOnEntityEnter.Call(gameObject, Vector2Int.RoundToInt(transform.position));
     }
 
     void OnMoveInput(Vector2 input)
