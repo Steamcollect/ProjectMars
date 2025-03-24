@@ -80,15 +80,11 @@ MonoBehaviour:
     endingPosition: {x: 1, y: 6}
   propsSurfaces:
   - propsData: {fileID: 11400000, guid: baa881083d32592458bb77fda64a8994, type: 2}
-    position: {x: 1, y: 1}
-  - propsData: {fileID: 11400000, guid: baa881083d32592458bb77fda64a8994, type: 2}
-    position: {x: -1, y: 3}
-  - propsData: {fileID: 11400000, guid: baa881083d32592458bb77fda64a8994, type: 2}
-    position: {x: 1, y: 4}
-  - propsData: {fileID: 11400000, guid: d56fe9a83e756e744a0a4b50fc2ff392, type: 2}
-    position: {x: 0, y: 5}
+    count: 3
   - propsData: {fileID: 11400000, guid: 71d1373f07316084ab38f6ab8f7814fd, type: 2}
-    position: {x: 0, y: 2}
+    count: 1
+  - propsData: {fileID: 11400000, guid: d56fe9a83e756e744a0a4b50fc2ff392, type: 2}
+    count: 1
   rsfGetNewWorldPos: {fileID: 11400000, guid: c0e6eecd11996dc4c8e54012eff911f9, type: 2}
   rseOnEntityEnter: {fileID: 11400000, guid: a8905096378150046a4c09e08dfaf570, type: 2}
   rseOnEntityExit: {fileID: 11400000, guid: d828f0b88ac95094885e40824cf5a30b, type: 2}

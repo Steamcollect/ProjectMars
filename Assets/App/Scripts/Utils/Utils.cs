@@ -17,6 +17,14 @@ public static class Utils
         }
         return elems.ElementAt(new System.Random().Next(0, elems.Count()));
     }
+    public static int GetRandomIndex<T>(this IEnumerable<T> elems)
+    {
+        if (elems.Count() == 0)
+        {
+            Debug.LogError("Try to get random elem from empty IEnumerable");
+        }
+        return new System.Random().Next(0, elems.Count());
+    }
     #endregion
 
     #region COROUTINE

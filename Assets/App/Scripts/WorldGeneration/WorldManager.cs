@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.UIElements;
-using Unity.VisualScripting;
+using Unity.Collections;
 
 public class WorldManager : MonoBehaviour
 {
@@ -13,7 +12,9 @@ public class WorldManager : MonoBehaviour
     Dictionary<Vector2Int, Tile> cases = new();
     Dictionary<Vector2Int, Props> props = new();
 
-    //[Space(10)]
+    List<Vector2Int> groundPos = new List<Vector2Int>();
+
+    [Space(10)]
     // RSO
     // RSF
     [SerializeField] RSF_GetNewWorldPosition rsfGetNewWorldPos;
@@ -69,20 +70,36 @@ public class WorldManager : MonoBehaviour
                     go.SetActive(false);
                 }
 
+                if (tile.caseData.caseType == CaseType.Walkable && position != Vector2.zero)
+                {
+                    groundPos.Add(position);
+                }
+
                 cases.Add(position, tile);
             }
         }
     }
     void SetupPropsSurfaces()
     {
-        for (int i = 0; i < propsSurfaces.Length; i++)
-        {
-            GameObject go = Instantiate(propsSurfaces[i].propsData.visual, new Vector3(propsSurfaces[i].position.x, 0, propsSurfaces[i].position.y), Quaternion.identity);
-            go.transform.SetParent(transform);
+        if(propsSurfaces.Length <= 0) return;
 
-            Props _props = new Props(propsSurfaces[i].position, go, propsSurfaces[i].propsData, go.GetComponent<Interactible>());
-            go.SetActive(false);
-            props.Add(propsSurfaces[i].position, _props);
+        foreach (PropsSurface propsSurface in propsSurfaces)
+        {
+            if (groundPos.Count <= 0) return;
+
+            for (int i = 0; i < propsSurface.count; i++)
+            {
+                int index = groundPos.GetRandomIndex();
+                Vector2Int position = groundPos[index];
+                groundPos.RemoveAt(index);
+
+                GameObject go = Instantiate(propsSurface.propsData.visual, new Vector3(position.x, 0,position.y), Quaternion.identity);
+                go.transform.SetParent(transform);
+
+                Props _props = new Props(position, go, propsSurface.propsData, go.GetComponent<Interactible>());
+                go.SetActive(false);
+                props.Add(position, _props);
+            }
         }
     }
 
@@ -157,7 +174,6 @@ public class WorldManager : MonoBehaviour
             if (_tile.interactible != null)
             {
                 _tile.interactible.OnEntityEnter(entity);
-                Debug.Log(_tile.caseData.GameObject());
             }
         }
         
@@ -214,18 +230,6 @@ public class WorldManager : MonoBehaviour
                 );
 
                 Gizmos.DrawCube(center, size);
-            }
-        }
-
-        if(propsSurfaces.Length > 0)
-        {
-            for (int i = 0; i < propsSurfaces.Length; i++)
-            {
-                if (propsSurfaces[i].propsData == null) continue;
-
-                Gizmos.color = propsSurfaces[i].propsData.debugColor;
-                Vector3 position = new Vector3(propsSurfaces[i].position.x, .5f, propsSurfaces[i].position.y);
-                Gizmos.DrawSphere(position, .3f);
             }
         }
     }
